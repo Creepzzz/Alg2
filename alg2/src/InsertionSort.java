@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.StdIn;
 public class InsertionSort {
     private static int size;
     private static int array[] = new int[size];
+    private static int numberOfSwaps;
 
     /**
      * Method implements insertion sort
@@ -32,6 +33,7 @@ public class InsertionSort {
         int swap = a[i];
         a[i] = a[j];
         a[j] = swap;
+        numberOfSwaps++;
     }
 
     /**
@@ -47,7 +49,7 @@ public class InsertionSort {
 
 
     /**
-     * 
+     *
      * @param args
      */
     public static void main(String [] args){
@@ -64,5 +66,6 @@ public class InsertionSort {
         sort(testArray);
         StdOut.println("\nSorted array: " + "\t");
         printArray(testArray);
+        StdOut.println("Number of swaps: " + numberOfSwaps);
     }
 }
