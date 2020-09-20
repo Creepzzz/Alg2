@@ -1,3 +1,25 @@
+/**
+ * CODE FOR ASSIGNMENT 5-6 SORTING LAB
+ * Author: Matilda Qvick 001105-0606
+ * Written: 16/9 - 2020
+ * Last updated 20/9 - 2020
+ * Purpose: The code counts the execution time for insertion sort
+ *          and merge sort. This is so the data can be compared and
+ *          analyzed. The user puts in wanted size of the array, then the
+ *          elements in the array are randomized and put into the array.
+ *          The method currentTimeInMills is used to calculate the difference
+ *          in time from start of execution to end of execution. The same array
+ *          is sorted with both insertion sort and merge sort and the time is
+ *          displayed in stdout.
+ *          For assignment 6, the user enters wanted cut-off in stdin.
+ * How to use: The user enters wanted assignment number, either 5 or 6.
+ *             Assignment 5: The user puts in wanted array size and a randomized
+ *             array is sorted with merge sort and insertion sort. The time is then
+ *             displayed in stdout.
+ *             Assignment 6: Everything in assignment 5 but the user enters wanted
+ *             cut-off in stdin. The time is then displayed in stdout.
+ */
+
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdRandom;
@@ -58,7 +80,6 @@ public class MergeSort {
     }
 
     /**
-     *
      * @param a first comparable object
      * @param b second comparable object
      * @return true if a is smaller than b
@@ -69,7 +90,7 @@ public class MergeSort {
 
     /**
      * Sorts the incoming array with insertion sort
-     * Worst case = n^2
+     * Worst case time complexity = n^2
      * @param a is comparable array to be sorted
      * @param lo is lowest index of array
      * @param hi is highest index of array
@@ -101,13 +122,18 @@ public class MergeSort {
      * @return true if the array is sorted
      */
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
-        for (int i = lo; i <= hi; i++)
+        for (int i = lo+1; i <= hi; i++)
             if (less(a[i], a[i-1])) return false;
         return true;
     }
 
     /**
-     *
+     * User puts in wanted assignment, and wanted array size, (and wanted cut-off
+     * for assignment 6).
+     * The array is randomized and copied into another second array.
+     * The arrays are then sorted and the time for execution is calculated.
+     * The times are then displayed in stdout.
+     * The arrays are checked with method isSorted as a test.
      * @param args
      */
     public static void main(String[]args){
@@ -124,18 +150,21 @@ public class MergeSort {
 
         for (int i = 0; i < size; i++) {
             testArray[i] = StdRandom.uniform(100);
-            testArray2[i] = StdRandom.uniform(100);
         }
+        System.arraycopy(testArray,0, testArray2, 0, size);
 
         time = System.currentTimeMillis();
         sort(testArray, testArray, 0, size-1);
         time = System.currentTimeMillis()-time;
 
-        //time2 = System.currentTimeMillis();
-        //insertionSort(testArray2, 0, size-1);
-        //time2 = System.currentTimeMillis()-time2;
+        time2 = System.currentTimeMillis();
+        insertionSort(testArray2, 0, size-1);
+        time2 = System.currentTimeMillis()-time2;
 
         StdOut.println("Time merge sort: " + time);
-       // StdOut.println("Time insertion sort: " + time2);
+        StdOut.println("Time insertion sort: " + time2);
+
+        assert isSorted(testArray, 0 , testArray.length-1);
+        assert isSorted(testArray2, 0, testArray2.length-1);
     }
 }
