@@ -14,6 +14,20 @@ How to use: The user puts wanted size of array and wanted elements into input
 
 #include<stdio.h>
 #include<conio.h>
+#include<stdbool.h>
+
+/*
+Method tests if the array is sorted. If any negative values
+are after the positive, the method returns false, else true.
+*/
+bool isSorted(int* p, int size) {
+	int i = 0;
+	for (int i = 0; i < size - 1; i++) {
+		if ((p[i] > 0) && (p[i + 1] < 0))
+			return false;		
+	}
+	return true;
+}
 
 /*
 Prints the array
@@ -72,4 +86,11 @@ int main(void) {
 
 	sort(p, size);
 	printArray(p, size);
+
+	//Test
+	bool x = isSorted(p, size);
+	if (x == true) {
+		printf("\ntrue");
+	}
+	else printf("\nfalse");
 }
